@@ -8,6 +8,7 @@ import adi
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import signal
+from scipy.fftpack import fftshift
 
 # Create radio
 sdr = adi.ad9361(uri="ip:analog.local")
@@ -47,7 +48,7 @@ for r in range(20):
     x = sdr.rx()
     f, Pxx_den = signal.periodogram(x, fs, window='blackman', return_onesided=False)
     plt.clf()
-    plt.semilogy(f, Pxx_den)
+    plt.semilogy(fftshift(f), fftshift(Pxx_den))
     plt.ylim([1e-9, 1e2])
     plt.xlabel("frequency [Hz]")
     plt.ylabel("PSD [V**2/Hz]")
