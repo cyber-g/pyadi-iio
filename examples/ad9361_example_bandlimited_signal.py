@@ -88,8 +88,8 @@ def generate_filtered_noise(size_array, BW, FS):
 sdr = adi.ad9361(uri="ip:analog.local")
 
 # Configure properties
-sdr.rx_rf_bandwidth         = int(50e6)
-sdr.sample_rate             = int(61.44e6)
+sdr.rx_rf_bandwidth         = int(50e6)     # Max bandwidth of AD9361 is 56 MHz
+sdr.sample_rate             = int(61.44e6)  # Max sample rate of AD9361 is 61.44 MHz
 sdr.rx_lo                   = int(2e9)
 sdr.tx_lo                   = int(2e9)
 sdr.tx_cyclic_buffer        = True
