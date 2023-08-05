@@ -38,7 +38,7 @@ def compute_fir_kaiser(fpass,fstop,fs,atten_level=60):
     """
     
     # Compute the filter order
-    M,beta= signal.fir_filter_design.kaiserord(atten_level, (fstop-fpass)/(fs/2.))
+    M,beta= signal.kaiserord(atten_level, (fstop-fpass)/(fs/2.))
     
     # Design the filter
     taps = signal.firwin(M,(fstop+fpass)/2.,window=('kaiser',beta),nyq=fs/2.)
