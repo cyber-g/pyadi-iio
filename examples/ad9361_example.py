@@ -14,7 +14,7 @@ sdr = adi.ad9361(uri="ip:analog.local")
 
 # Configure properties
 sdr.rx_rf_bandwidth         = int(4e6)
-sdr.sample_rate             = int(6e6)
+sdr.sample_rate             = int(61.44e6)
 sdr.rx_lo                   = int(2e9)
 sdr.tx_lo                   = int(2e9)
 sdr.tx_cyclic_buffer        = True
@@ -30,7 +30,7 @@ print("RX LO %s" % (sdr.rx_lo))
 
 # Create a sinewave waveform
 fs    = int(sdr.sample_rate)
-N     = 1024
+N     = 2**14
 fc    = int(1e6 / (fs / N)) * (fs / N)
 ts    = 1 / float(fs)
 t     = np.arange(0, N * ts, ts)
@@ -45,10 +45,10 @@ sdr.tx(iq)
 # Collect data
 for r in range(20):
     x = sdr.rx()
-    f, Pxx_den = signal.periodogram(x, fs)
+    f, Pxx_den = signal.periodogram(x, fs, window='blackman', return_onesided=False)
     plt.clf()
     plt.semilogy(f, Pxx_den)
-    plt.ylim([1e-7, 1e2])
+    plt.ylim([1e-9, 1e2])
     plt.xlabel("frequency [Hz]")
     plt.ylabel("PSD [V**2/Hz]")
     plt.draw()
