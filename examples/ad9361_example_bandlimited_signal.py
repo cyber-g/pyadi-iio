@@ -102,17 +102,17 @@ sdr.tx_enabled_channels = [0]
 # Read properties
 print("RX LO %s" % (sdr.rx_lo))
 
-# Create a sinewave waveform
+# Create a complex-valued bandlimited signal
 fs    = int(sdr.sample_rate)
 N     = 1024
-fc    = int(1e6 / (fs / N)) * (fs / N)
+bw    = 1.3e6
 ts    = 1 / float(fs)
 t     = np.arange(0, N * ts, ts)
 
 DAC_full_scale_int = 2 ** 14
 
-i = np.cos(2 * np.pi * t * fc) * DAC_full_scale_int
-q = np.sin(2 * np.pi * t * fc) * DAC_full_scale_int
+i = generate_filtered_noise(N, bw, fs) * DAC_full_scale_int
+q = generate_filtered_noise(N, bw, fs) * DAC_full_scale_int
 iq = i + 1j * q
 
 # Send data
