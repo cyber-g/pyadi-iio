@@ -41,7 +41,7 @@ def compute_fir_kaiser(fpass,fstop,fs,atten_level=60):
     M,beta= signal.kaiserord(atten_level, (fstop-fpass)/(fs/2.))
     
     # Design the filter
-    taps = signal.firwin(M,(fstop+fpass)/2.,window=('kaiser',beta),nyq=fs/2.)
+    taps = signal.firwin(M,(fstop+fpass)/2.,window=('kaiser',beta),fs=fs)
     
     return taps
 
