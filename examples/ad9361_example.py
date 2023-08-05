@@ -13,12 +13,12 @@ from scipy import signal
 sdr = adi.ad9361(uri="ip:analog.local")
 
 # Configure properties
-sdr.rx_rf_bandwidth = 4000000
-sdr.sample_rate = 6000000
-sdr.rx_lo = 2000000000
-sdr.tx_lo = 2000000000
-sdr.tx_cyclic_buffer = True
-sdr.tx_hardwaregain_chan0 = -30
+sdr.rx_rf_bandwidth         = int(4e6)
+sdr.sample_rate             = int(6e6)
+sdr.rx_lo                   = int(2e9)
+sdr.tx_lo                   = int(2e9)
+sdr.tx_cyclic_buffer        = True
+sdr.tx_hardwaregain_chan0   = -30
 sdr.gain_control_mode_chan0 = "slow_attack"
 
 # Configuration data channels
@@ -29,14 +29,15 @@ sdr.tx_enabled_channels = [0]
 print("RX LO %s" % (sdr.rx_lo))
 
 # Create a sinewave waveform
-fs = int(sdr.sample_rate)
-N = 1024
-fc = int(1000000 / (fs / N)) * (fs / N)
-ts = 1 / float(fs)
-t = np.arange(0, N * ts, ts)
-i = np.cos(2 * np.pi * t * fc) * 2 ** 14
-q = np.sin(2 * np.pi * t * fc) * 2 ** 14
-iq = i + 1j * q
+fs    = int(sdr.sample_rate)
+N     = 1024
+fc    = int(1e6 / (fs / N)) * (fs / N)
+ts    = 1 / float(fs)
+t     = np.arange(0, N * ts, ts)
+
+i   = np.cos(2 * np.pi * t * fc) * 2 ** 14
+q   = np.sin(2 * np.pi * t * fc) * 2 ** 14
+iq  = i + 1j * q
 
 # Send data
 sdr.tx(iq)
