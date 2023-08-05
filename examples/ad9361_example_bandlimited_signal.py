@@ -88,8 +88,8 @@ def generate_filtered_noise(size_array, BW, FS):
 sdr = adi.ad9361(uri="ip:analog.local")
 
 # Configure properties
-sdr.rx_rf_bandwidth         = int(4e6)
-sdr.sample_rate             = int(6e6)
+sdr.rx_rf_bandwidth         = int(50e6)
+sdr.sample_rate             = int(61.44e6)
 sdr.rx_lo                   = int(2e9)
 sdr.tx_lo                   = int(2e9)
 sdr.tx_cyclic_buffer        = True
@@ -106,7 +106,7 @@ print("RX LO %s" % (sdr.rx_lo))
 # Create a complex-valued bandlimited signal
 fs    = int(sdr.sample_rate)
 N     = 1024
-bw    = 1.3e6
+bw    = 5e6
 ts    = 1 / float(fs)
 t     = np.arange(0, N * ts, ts)
 
