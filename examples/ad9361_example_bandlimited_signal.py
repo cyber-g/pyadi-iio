@@ -118,6 +118,9 @@ iq = i + 1j * q
 # Send data
 sdr.tx(iq)
 
+# Wait for 1 second to allow for TX to settle
+time.sleep(1)
+
 # Collect data
 for r in range(20):
     x = sdr.rx()
@@ -127,6 +130,7 @@ for r in range(20):
     plt.ylim([1e-7, 1e2])
     plt.xlabel("frequency [Hz]")
     plt.ylabel("PSD [V**2/Hz]")
+    plt.grid()
     plt.draw()
     plt.pause(0.05)
     time.sleep(0.1)
@@ -139,6 +143,7 @@ plt.semilogy(f, Pxx_den)
 plt.ylim([1e-7, 1e3])
 plt.xlabel("frequency [Hz]")
 plt.ylabel("PSD [V**2/Hz]")
+plt.grid()
 plt.title("Signal sent to DACs")
 
 plt.show()
