@@ -121,7 +121,7 @@ sdr.tx(iq)
 # Collect data
 for r in range(20):
     x = sdr.rx()
-    f, Pxx_den = signal.periodogram(x, fs)
+    f, Pxx_den = signal.periodogram(x, fs, return_onesided=False)
     plt.clf()
     plt.semilogy(f, Pxx_den)
     plt.ylim([1e-7, 1e2])
@@ -130,5 +130,15 @@ for r in range(20):
     plt.draw()
     plt.pause(0.05)
     time.sleep(0.1)
+plt.title("Received signal")
+
+# Plot the signal sent to DACs
+plt.figure()
+f, Pxx_den = signal.periodogram(iq, fs, return_onesided=False)
+plt.semilogy(f, Pxx_den)
+plt.ylim([1e-7, 1e3])
+plt.xlabel("frequency [Hz]")
+plt.ylabel("PSD [V**2/Hz]")
+plt.title("Signal sent to DACs")
 
 plt.show()
