@@ -10,6 +10,7 @@ import adi
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import signal
+from scipy.fftpack import fftshift
 
 def compute_fir_kaiser(fpass,fstop,fs,atten_level=60):
     """
@@ -124,9 +125,9 @@ time.sleep(1)
 # Collect data
 for r in range(20):
     x = sdr.rx()
-    f, Pxx_den = signal.periodogram(x, fs, return_onesided=False)
+    f, Pxx_den = signal.welch(x, fs, return_onesided=False)
     plt.clf()
-    plt.semilogy(f, Pxx_den)
+    plt.semilogy(fftshift(f), fftshift(Pxx_den))
     plt.ylim([1e-7, 1e2])
     plt.xlabel("frequency [Hz]")
     plt.ylabel("PSD [V**2/Hz]")
@@ -138,8 +139,8 @@ plt.title("Received signal")
 
 # Plot the signal sent to DACs
 plt.figure()
-f, Pxx_den = signal.periodogram(iq, fs, return_onesided=False)
-plt.semilogy(f, Pxx_den)
+f, Pxx_den = signal.welch(iq, fs, return_onesided=False)
+plt.semilogy(fftshift(f), fftshift(Pxx_den))
 plt.ylim([1e-7, 1e3])
 plt.xlabel("frequency [Hz]")
 plt.ylabel("PSD [V**2/Hz]")
