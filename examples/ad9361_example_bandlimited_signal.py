@@ -55,9 +55,9 @@ def generate_filtered_noise(size_array, BW, FS):
     size_array : tuple of int
         matrix size
     BW : float
-        Bandwidth of the signal [Hz]
+        RF Bandwidth of the signal (bilateral)  [Hz]
     FS : float
-        Sampling frequency      [Hz]
+        Sampling frequency                      [Hz]
 
     Returns
     -------
@@ -70,7 +70,7 @@ def generate_filtered_noise(size_array, BW, FS):
     noise = np.random.normal(size=size_array)
     
     # Instanciate the filter
-    taps = compute_fir_kaiser(0, BW, FS)
+    taps = compute_fir_kaiser(BW/2, (BW/2)*1.1, FS)
 
     # Filter the noise, use convolve in order to get transients fade in/out
     # making the signal more circular (useful for spectral analysis and cyclic
