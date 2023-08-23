@@ -88,8 +88,7 @@ def generate_filtered_noise(size_array, BW, FS):
 sdr = adi.ad9361(uri="ip:analog.local")
 
 # Configure properties
-sdr.rx_rf_bandwidth         = int(50e6)     # Max bandwidth of AD9361 is 56 MHz
-sdr.sample_rate             = int(61.44e6)  # Max sample rate of AD9361 is 61.44 MHz
+sdr.filter                  = 'phaser/LTE20_MHz.ftr'
 sdr.rx_lo                   = int(2e9)
 sdr.tx_lo                   = int(2e9)
 sdr.tx_cyclic_buffer        = True
@@ -128,7 +127,7 @@ for r in range(20):
     f, Pxx_den = signal.welch(x, fs, return_onesided=False)
     plt.clf()
     plt.semilogy(fftshift(f), fftshift(Pxx_den))
-    plt.ylim([1e-7, 1e2])
+    plt.ylim([1e-9, 1e3])
     plt.xlabel("frequency [Hz]")
     plt.ylabel("PSD [V**2/Hz]")
     plt.grid()
@@ -141,7 +140,7 @@ plt.title("Received signal")
 plt.figure()
 f, Pxx_den = signal.welch(iq, fs, return_onesided=False)
 plt.semilogy(fftshift(f), fftshift(Pxx_den))
-plt.ylim([1e-7, 1e3])
+plt.ylim([1e-9, 1e3])
 plt.xlabel("frequency [Hz]")
 plt.ylabel("PSD [V**2/Hz]")
 plt.grid()
