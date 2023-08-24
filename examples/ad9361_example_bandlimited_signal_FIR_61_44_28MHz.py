@@ -118,7 +118,10 @@ def print_all_properties(sdr):
 sdr = adi.ad9361(uri="ip:analog.local")
 
 # Configure properties
-sdr.filter                  = 'phaser/LTE20_MHz.ftr'
+sdr.filter                  = 'filter/61_44_28MHz.ftr'
+
+# Force the same RF bandwidth for TX and RX (51.641372 MHz)
+sdr.tx_rf_bandwidth         = sdr.rx_rf_bandwidth
 
 # Print all properties
 print_all_properties(sdr)
@@ -137,7 +140,7 @@ sdr.tx_enabled_channels = [0]
 # Create a complex-valued bandlimited signal
 fs    = int(sdr.sample_rate)
 N     = 1024
-bw    = 5e6 # anything below 19.36 MHz (tx_rf_bandwidth & rx_rf_bandwidth)
+bw    = 5e6 # anything below 51.6 MHz (tx_rf_bandwidth & rx_rf_bandwidth=51.64)
 ts    = 1 / float(fs)
 t     = np.arange(0, N * ts, ts)
 
