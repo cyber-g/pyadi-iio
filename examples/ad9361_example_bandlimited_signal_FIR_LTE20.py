@@ -137,7 +137,7 @@ sdr.tx_enabled_channels = [0]
 # Create a complex-valued bandlimited signal
 fs    = int(sdr.sample_rate)
 N     = 1024
-bw    = 5e6
+bw    = 5e6 # anything below 19.36 MHz (tx_rf_bandwidth & rx_rf_bandwidth)
 ts    = 1 / float(fs)
 t     = np.arange(0, N * ts, ts)
 
