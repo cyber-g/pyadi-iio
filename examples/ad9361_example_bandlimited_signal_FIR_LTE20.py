@@ -82,13 +82,48 @@ def generate_filtered_noise(size_array, BW, FS):
     
     return noise_sig
 
+def print_all_properties(sdr):
+    """
+    Print all properties of the radio
 
+    Parameters
+    ----------
+    sdr : object
+        Radio object
+
+    Returns
+    -------
+    None.
+
+    Properties are found in pyadi-iio/adi/ad936x.py
+
+    Author: Germain Pham, @cyber-g, Aug. 2023
+    """
+    
+    print('The SDR properties are:')    
+    print('\t loopback: ______________ ',(sdr.loopback))
+    print('\t gain_control_mode_chan0: ',(sdr.gain_control_mode_chan0))
+    print('\t rx_hardwaregain_chan0: _ ',(sdr.rx_hardwaregain_chan0))
+    print('\t tx_hardwaregain_chan0: _ ',(sdr.tx_hardwaregain_chan0))
+    print('\t rx_rf_bandwidth: _______ ',(sdr.rx_rf_bandwidth))
+    print('\t tx_rf_bandwidth: _______ ',(sdr.tx_rf_bandwidth))
+    print('\t sample_rate: ___________ ',(sdr.sample_rate))
+    print('\t rx_lo: _________________ ',(sdr.rx_lo))
+    print('\t tx_lo: _________________ ',(sdr.tx_lo))
+    print('\t gain_control_mode_chan1: ',(sdr.gain_control_mode_chan1))
+    print('\t rx_hardwaregain_chan1: _ ',(sdr.rx_hardwaregain_chan1))
+    print('\t tx_hardwaregain_chan1: _ ',(sdr.tx_hardwaregain_chan1))
 
 # Create radio
 sdr = adi.ad9361(uri="ip:analog.local")
 
 # Configure properties
 sdr.filter                  = 'phaser/LTE20_MHz.ftr'
+
+# Print all properties
+print_all_properties(sdr)
+
+# Configure some parameters of the radio
 sdr.rx_lo                   = int(2e9)
 sdr.tx_lo                   = int(2e9)
 sdr.tx_cyclic_buffer        = True
@@ -98,9 +133,6 @@ sdr.gain_control_mode_chan0 = "slow_attack"
 # Configuration data channels
 sdr.rx_enabled_channels = [0]
 sdr.tx_enabled_channels = [0]
-
-# Read properties
-print("RX LO %s" % (sdr.rx_lo))
 
 # Create a complex-valued bandlimited signal
 fs    = int(sdr.sample_rate)
