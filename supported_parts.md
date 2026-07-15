@@ -10,6 +10,7 @@
 [[Wiki](https://wiki.analog.com/resources/tools-software/linux-software/pyadi-iio)]
 
 ### Currently supported hardware
+- AD2S1210
 - AD4020
 - AD4130
 - AD4110
@@ -55,6 +56,12 @@
 - AD5695R
 - AD5696
 - AD5696R
+- AD5760
+- AD5780
+- AD5781
+- AD5790
+- AD5791
+- AD5754R
 - AD5940
 - AD6676
 - AD7124
@@ -72,6 +79,7 @@
 - AD7291
 - AD7768
 - AD7768-4
+- AD7768-1
 - AD7770
 - AD7771
 - AD7779
@@ -106,6 +114,7 @@
 - ADF5610
 - ADG2128
 - ADIS16460
+- ADIS16475
 - ADIS16495
 - ADIS16507
 - ADL5240

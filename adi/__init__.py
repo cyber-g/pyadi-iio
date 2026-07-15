@@ -2,7 +2,9 @@
 #
 # SPDX short identifier: ADIBSD
 
+from adi.ad2s1210 import ad2s1210
 from adi.ad469x import ad469x
+from adi.ad578x import ad578x
 from adi.ad717x import ad717x
 from adi.ad719x import ad719x
 from adi.ad777x import ad777x
@@ -14,6 +16,7 @@ from adi.ad4630 import ad4630
 from adi.ad4858 import ad4858
 from adi.ad5592r import ad5592r
 from adi.ad5686 import ad5686
+from adi.ad5754r import ad5754r
 from adi.ad5940 import ad5940
 from adi.ad6676 import ad6676
 from adi.ad7124 import ad7124
@@ -22,6 +25,7 @@ from adi.ad7606 import ad7606
 from adi.ad7689 import ad7689
 from adi.ad7746 import ad7746
 from adi.ad7768 import ad7768, ad7768_4
+from adi.ad7768_1 import ad7768_1
 from adi.ad7799 import ad7799
 from adi.ad9081 import ad9081
 from adi.ad9081_mc import QuadMxFE, ad9081_mc
@@ -51,6 +55,7 @@ from adi.adf4371 import adf4371
 from adi.adf5610 import adf5610
 from adi.adg2128 import adg2128
 from adi.adis16460 import adis16460
+from adi.adis16475 import adis16475
 from adi.adis16495 import adis16495
 from adi.adis16507 import adis16507
 from adi.adl5240 import adl5240

@@ -93,6 +93,16 @@ daq3:
       - data_devices:
           - iio:device3
           - iio:device4
+
+ad2s1210:
+  - ad2s1210
+  - pyadi_iio_class_support:
+      - ad2s1210
+  - emulate:
+      - filename: ad2s1210.xml
+      - data_devices:
+          - iio:device1
+
 ad9081:
   - axi-ad9081-tx-hpc
   - axi-ad9081-rx-hpc
@@ -342,6 +352,15 @@ ad7768-4:
       - data_devices:
           - iio:device0
 
+ad7768_1:
+  - ad7768-1
+  - pyadi_iio_class_support:
+      - ad7768_1
+  - emulate:
+      - filename: ad7768_1.xml
+      - data_devices:
+          - iio:device0
+
 ad5592r:
   - ad5592r
   - pyadi_iio_class_support:
@@ -349,6 +368,24 @@ ad5592r:
   - emulate:
       - filename: ad5592r.xml
       - data_devices:
+          - iio:device0
+          
+ad578x:
+  - ad578x
+  - pyadi_iio_class_support:
+      - ad578x
+  - emulate:
+      - filename: ad578x.xml
+      - data_devices: 
+          - iio:device0
+
+ad5754r:
+  - ad5754r
+  - pyadi_iio_class_support:
+      - ad5754r
+  - emulate:
+      - filename: ad5754r.xml
+      - data_devices: 
           - iio:device0
 
 ad7291:
@@ -397,3 +434,12 @@ ad4858:
       - data_devices:
           - iio:device0
           - iio:device2
+
+adis16475:
+  - adis16475
+  - emulate:
+      - filename: adis16475.xml
+      - data_devices:
+        - iio:device0
+  - pyadi_iio_class_support:
+      - adis16475
